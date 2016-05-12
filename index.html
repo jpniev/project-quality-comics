@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta name="description" content="Proyecto final usando CSS + JS + WebStorage" />
+        <meta name="author" content="Juan Pablo Nievas" />
+        <script src="js/jquery-1.12.3.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/carousel.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="stylesheet" type="text/css" href="css/owl.carousel.css" />
+        <link rel="stylesheet" type="text/css" href="css/animate.css" />
+
+        <title>Project Comic</title>
+</head>
+<body>
+<div id="login">
+	<header id="loginHeader">
+		<img src="images/logo.png" alt="Quality Comics"/>
+	</header>
+	<section id="loginWrapper">
+		<div id="loginCard">
+			<h2 id="titleForm">Login</h2>
+				<form id="formType" onsubmit="formSent(event)">
+				    <p >
+				        <label for="user">Username</label>
+				        <input type="text" name="user" id="user" placeholder="Username">
+				        <span class="error" id="userError"></span>
+				    </p>
+				    <p>
+				        <label for="password">Password</label>
+				        <input type="password" name="password" id="password" placeholder="Password"> 
+				        <span class="error" id="passError"></span>
+				    </p>
+				    <p class="submit-content">
+				        <input type="submit" name="submit" value="Sign in" id="formSubmit">
+				    </p> 
+				    <p class="remember">
+				        <input type="checkbox" name="remember" id="remember">
+				        <label for="remember">Remember me</label>
+				    </p>
+				    <p class="administrator">
+				        <input type="checkbox" name="admin" id="admin">
+				        <label for="admin">I'am Administrator</label>
+				    </p>
+				    <div class="login">
+				    	<button type="button" onclick="btnLogin()" class="btn-register">Login</button>
+						<button type="button" onclick="btnRegister()" class="btn-register">Register</button>  
+				    </div>
+				</form>​
+				<div id="infoForm"></div>
+			</div>
+	</section>
+</div>
+<div id="wrapper">
+	<header id="loggedHeader">
+		<nav id="menu">
+			<div id="logo">
+				<img src="images/logo.png" class="logo">
+			</div>
+			<div id="loggedUserBar">
+				<div id="userInfo"></div>
+				<button type="button" onclick="logout()">Logout</button>		
+			</div>			
+		</nav>
+	</header>
+	<section>
+		<div id="banners"></div>
+		<div id="searchOuter">
+			<div id="searchInner">
+				<div id="searchInputDiv"><input type="text" id="searchInput" placeholder="enter your search" onkeyup="filterComics()"/></div>
+				<div id="searchByDiv">
+					Search by: 
+					<select id="searchBy" onchange="searchByChange()">
+						<option value="title">Name</option>
+						<option value="characters">Characters</option>
+						<option value="genre">Genre</option>
+					</select>
+				</div>
+				<div id="recommendedDiv">Only recommended? <input type="checkbox" id="recommendedCheck" onchange="filterComics()"/></div>
+				<div id="filterByCharacterDiv">Filter by character: 
+					<select id="filterByCharacter" onchange="filterComics()">
+						<option value="all">All</option>
+					</select>
+				</div>
+				<div id="filterByGenreDiv">or by genre:
+					<select id="filterByGenre" onchange="filterComics()">
+						<option value="all">All</option>
+					</select>
+				</div>
+
+			</div>
+		</div>
+		<div id="content"></div>
+		</section>
+		
+	
+</div>
+<footer>
+	<div id="footerContainer">
+		<span>Quality Comics&copy; - Copyright 2016</span><br/>
+		<span>Powered by Juan Pablo Nievas</span>
+	</div>
+</footer>
+	<script src="js/data.js"></script>
+	<script src="js/script.js"></script>
+</body>
+</html>
