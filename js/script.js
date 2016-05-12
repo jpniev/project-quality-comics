@@ -390,7 +390,7 @@ function showComics(){
 		nothingFound.innerHTML = "No matching results for your search";
 		content.appendChild(nothingFound);
 	}
-	comicsFiltered.forEach(function(item, id){
+	comicsFiltered.forEach(function(item){
 		var comicWrapper = document.createElement("div");
 		var comic = document.createElement("div");
 		var comicCover = document.createElement("img");
@@ -428,9 +428,9 @@ function showComics(){
 		comicDesc.appendChild(comicDescInner);
 
 		if(loggedUserProfile === "admin"){
-			comicDescInner.innerHTML += "<hr/><div>Administrator options:</div><div><b>Recommended?</b> <input type=\"checkbox\" id=\"comic-recommended-"+id+"\" onchange=\"changeRecommended("+id+")\"/></div><div><b>Borrowed?</b> <input type=\"checkbox\" id=\"comic-borrowed-"+id+"\" onchange=\"changeBorrowed("+id+")\"/></div>";
-			var comicRecommended = document.getElementById('comic-recommended-'+id);
-			var comicBorrowed = document.getElementById('comic-borrowed-'+id);
+			comicDescInner.innerHTML += "<hr/><div>Administrator options:</div><div><b>Recommended?</b> <input type=\"checkbox\" id=\"comic-recommended-"+item.id+"\" onchange=\"changeRecommended("+item.id+")\"/></div><div><b>Borrowed?</b> <input type=\"checkbox\" id=\"comic-borrowed-"+item.id+"\" onchange=\"changeBorrowed("+item.id+")\"/></div>";
+			var comicRecommended = document.getElementById('comic-recommended-'+item.id);
+			var comicBorrowed = document.getElementById('comic-borrowed-'+item.id);
 			comicRecommended.checked = item.recommended;
 			comicBorrowed.checked = item.borrowed;
 		}
@@ -440,27 +440,37 @@ function showComics(){
 }
 
 function changeRecommended(id){
+	
 	var changedRec = document.getElementById('comic-recommended-'+id);
-	if(changedRec.checked){
-		comics[id].recommended = true;
-		localStorage.setItem('comicsJson', JSON.stringify(comics));
-	} else {
-		comics[id].recommended = false;
-		localStorage.setItem('comicsJson', JSON.stringify(comics));
-	}
+	comics.forEach(function(item){
+		if(item.id == id){
+			if(changedRec.checked){
+				item.recommended = true;
+				localStorage.setItem('comicsJson', JSON.stringify(comics));
+			} else {
+				item.recommended = false;
+				localStorage.setItem('comicsJson', JSON.stringify(comics));
+			}
+		}
+	});
 	refreshComics();
 	showComics();
 }
 
 function changeBorrowed(id){
-	var changedBor = document.getElementById('comic-borrowed-'+id);
-	if(changedBor.checked){
-		comics[id].borrowed = true;
-		localStorage.setItem('comicsJson', JSON.stringify(comics));
-	} else {
-		comics[id].borrowed = false;
-		localStorage.setItem('comicsJson', JSON.stringify(comics));
-	}
+
+	var changedBor = document.getElementById('comic-borrowed-'+id);	
+	comics.forEach(function(item){
+		if(item.id == id){
+			if(changedBor.checked){
+				item.borrowed = true;
+				localStorage.setItem('comicsJson', JSON.stringify(comics));
+			} else {
+				item.borrowed = false;
+				localStorage.setItem('comicsJson', JSON.stringify(comics));
+			}
+		}
+	});
 	refreshComics();
 	showComics();
 }
